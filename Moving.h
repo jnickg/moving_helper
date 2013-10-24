@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Staging.h"
 #include "Storage.h"
 #include "Item.h"

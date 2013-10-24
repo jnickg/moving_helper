@@ -47,7 +47,6 @@ public:
 	Staging(void)
 	{
 		home = NULL;
-		cur = NULL;
 		count = 0;
 	}
 
@@ -68,7 +67,6 @@ public:
 			home->data = data;
 
 			home->next = home;
-			cur = home;
 
 			return ++count;
 		}
@@ -130,18 +128,25 @@ public:
 		}
 	}
 
-	int get_count(void)
+	int peek(T & data)
+	{
+		if(NULL == home)
+		{
+			return 0;
+		}
+		else
+		{
+			data = home->data;
+			return 1;
+		}
+	}
+
+	int getCount(void)
 	{
 		return count;
 	}
 
-	int displayAll(void)
-	{
-
-	}
-
 private:
 	node<T>* home; // The 'home' location for the CLL
-	node<T>* cur; // The iterator
 	int count; // The number of nodes
 };

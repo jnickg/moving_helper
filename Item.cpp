@@ -12,7 +12,7 @@ Item::Item(void)
 // them to this.
 Item::Item(char* n, double w, double v)
 {
-	name = n;
+	strcpy(name, n);
 	weight = w;
 	volume = v;
 }
@@ -76,16 +76,8 @@ int Item::retrieve(Item & i)
 	i = *this;
 }
 
-// Displays all data from this to cout
-//
-// Used for debugging and troubleshooting
-int Item::display(void)
-{
-
-}
-
 Item& Item::operator=(const Item& right)
 {
-	this->copyItem(right);
+	(*this).copyItem(right);
 	return *this;
 }

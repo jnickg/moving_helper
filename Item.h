@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ostream>
 #include <cstring>
 
 /* ITEM CLASS
@@ -27,11 +29,9 @@ public:
 	int createItem(char* n, double w, double v); // For default-constructed Items
 	int copyItem(const Item & i); // To push all data at once from another Item
 	int retrieve(char* n, double& w, double& v) const;
-	int retrieve(Item & i); // To pull al data at once to another Item
-	int display(void); // Troubleshooting
+	int retrieve(Item & i); // To pull all data at once to another Item
 
 	Item& operator=(const Item& right); // Operator overload invokes copyItem
-
 private:
 	char* name; // The name of the item
 	double weight; // The weight of the item

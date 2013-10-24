@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iostream>
 
 /* Storage (LINEAR LINKED LIST)
 Storage.h
@@ -133,11 +134,6 @@ public:
 	int getsize(void)
 	{
 		return size;
-	}
-
-	int displayAll(void)
-	{
-
 	}
 
 private:

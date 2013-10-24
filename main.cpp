@@ -6,6 +6,6 @@ using namespace std;
 
 int main(void)
 {
-	Moving karlasMom();
+	Moving kmh; // Karla's Mom's House
 	return 0;
 }
