@@ -81,3 +81,13 @@ Item& Item::operator=(const Item& right)
 	(*this).copyItem(right);
 	return *this;
 }
+
+std::ostream& operator<<(std::ostream& out, const Item* const item)
+{
+	out << "\nITEM\n"
+		<< "Name:\t" << item->name << "\n"
+		<< "Weight:\t" << item->weight << "\n"
+		<< "Volume:\t" << item->volume << "\n"
+		<< std::endl;
+	return out;
+}

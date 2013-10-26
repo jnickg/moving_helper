@@ -136,7 +136,20 @@ public:
 		return size;
 	}
 
+	std::ostream& displayAll(std::ostream& out) const
+	{
+		node<T>* tmp = top;
+		
+		while(tmp)
+		{
+			out << tmp->data << std::endl;
+			tmp = tmp->next;
+		}
+		
+		return out;
+	}
 private:
 	int size; // Current size
 	node<T>* top; // Pointer to the top of the stack
 };
+

@@ -146,6 +146,20 @@ public:
 		return count;
 	}
 
+	std::ostream& displayAll(std::ostream& out) const
+	{
+		if(home)
+		{
+			node<T>* tmp = home->next;
+			do
+			{
+				out << tmp->data << std::endl;
+				tmp = tmp->next;
+			} while(temp!=home)
+		}
+		return out;
+	}
+
 private:
 	node<T>* home; // The 'home' location for the CLL
 	int count; // The number of nodes

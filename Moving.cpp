@@ -33,39 +33,44 @@ int Moving::addToUStore(char* n, double w, double v)
 	Item toAdd(n, w, v);
 	ustore.push(toAdd);
 }
-	
-int Moving::displayDonations(void)
+
+std::ostream& Moving::displayDonations(std::ostream& out) const
 {
-	//cout << "\n\nDISPLAYING ITEMS STAGED FOR DONATION" << endl;
-	//donations.displayAll();
+	out << "\n\nDISPLAYING ITEMS STAGED FOR DONATION" << std::endl;
+	donations.displayAll(out);
+	return out
 }
 
-int Moving::displayLoading(void)
+std::ostream& Moving::displayLoading(std::ostream& out) const
 {
-	//cout << "\n\nDISPLAYING ITEMS STAGED FOR LOADING" << endl;
-	//loading.displayAll();
+	out << "\n\nDISPLAYING ITEMS STAGED FOR LOADING" << std::endl;
+	loading.displayAll(out);
+	return out;
 }
 
-int Moving::displayTruck(void)
+std::ostream& Moving::displayTruck(std::ostream& out) const
 {
-	//cout << "\n\nDISPLAYING ITEMS LOADED INTO TRUCK" << endl;
-	//truck.displayAll();
+	out << "\n\nDISPLAYING ITEMS LOADED INTO TRUCK" << std::endl;
+	truck.displayAll(out);
+	return out;
 }
 
-int Moving::displayUStore(void)
+std::ostream& Moving::displayUStore(std::ostream& out) const
 {
-	//cout << "\n\nDISPLAYING ITEMS LOADED INTO U-STORE" << endl;
-	//ustore.displayAll();
+	out << "\n\nDISPLAYING ITEMS LOADED INTO U-STORE" << std::endl;
+	ustore.displayAll(out);
+	return out;
 }
 
 // Invokes all of the above
-int Moving::displayAll(void)
+std::ostream& Moving::displayAll(std::ostream& out) const
 {
-	//cout << "\n\n\nDISPLAYING EVERYTHING\n" << endl;
-	//displayDonations();
-	//displayLoading();
-	//displayTruck();
-	//displayUStore();
+	out << "\n\n\nDISPLAYING EVERYTHING\n" << std::endl;
+	displayDonations(out);
+	displayLoading(out);
+	displayTruck(out);
+	displayUStore(out);
+	return out;
 }
 
 // Removes the next item from the Donations Staging
@@ -98,4 +103,10 @@ int Moving::rmvFromUStore(Item& i)
 int Moving::burnEverythingAndStartOver(void)
 {
 
+}
+
+std::ostream& operator<<(std::ostream& out, const Moving* const mov)
+{
+	mov->displayAll(out);
+	return out;
 }

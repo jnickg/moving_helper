@@ -14,11 +14,11 @@ public:
 	int addToTruck(char* n, double w, double v);
 	int addToUStore(char* n, double w, double v);
 	
-	int displayDonations(void);
-	int displayLoading(void);
-	int displayTruck(void);
-	int displayUStore(void);
-	int displayAll(void); // Invokes all of the above
+	std::ostream& displayDonations(std::ostream& out) const;
+	std::ostream& displayLoading(std::ostream& out) const;
+	std::ostream& displayTruck(std::ostream& out) const;
+	std::ostream& displayUStore(std::ostream& out) const;
+	std::ostream& displayAll(std::ostream& out) const; // Invokes all of the above
 
 	int rmvFromDonations(Item& i); // Removes the next item from the Donations Staging
 	int rmvFromLoading(Item& i); // Removes the next item from the Loading Staging
@@ -33,3 +33,5 @@ private:
 	Storage<Item> truck;
 	Storage<Item> ustore;
 };
+
+std::ostream& operator<<(std::ostream& out, const Moving* const mov);

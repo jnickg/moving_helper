@@ -33,7 +33,10 @@ public:
 
 	Item& operator=(const Item& right); // Operator overload invokes copyItem
 private:
+	friend std::ostream& operator<<(std::ostream& out, const Item* const item);
 	char* name; // The name of the item
 	double weight; // The weight of the item
 	double volume; // The item's volume
 };
+
+std::ostream& operator<<(std::ostream& out, const Item* const item);
