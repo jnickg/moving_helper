@@ -30,7 +30,8 @@ public:
 	int copyItem(const Item & i); // To push all data at once from another Item
 	int retrieve(char* n, double& w, double& v) const;
 	int retrieve(Item & i); // To pull all data at once to another Item
-
+	
+	std::ostream& print(std::ostream& out) const;
 	Item& operator=(const Item& right); // Operator overload invokes copyItem
 private:
 	friend std::ostream& operator<<(std::ostream& out, const Item* const item);

@@ -40,6 +40,11 @@ template <class T> struct node
 	efficiently-implemented operator= overload,
 	as this template class simply uses operator=
 
+	Use of this template requires that T has a
+	function with the following signature:
+	std::ostream& T::print(std::ostream& out) const
+	or else it will not compile correctly.
+
 */
 template <class T> class Staging
 {
@@ -63,7 +68,7 @@ public:
 		// Case 1: empty
 		if(NULL == home)
 		{
-			home = new node<T>();
+			home = new node<T>;
 			home->data = data;
 
 			home->next = home;
@@ -151,11 +156,14 @@ public:
 		if(home)
 		{
 			node<T>* tmp = home->next;
+			T dummy;
 			do
 			{
-				out << tmp->data << std::endl;
+				dummy = tmp->data;
+				dummy.print(out);
+				//out << dummy << std::endl; // Doesn't work because compiler doesn't know what T is
 				tmp = tmp->next;
-			} while(temp!=home)
+			} while(tmp!=home);
 		}
 		return out;
 	}
@@ -164,3 +172,4 @@ private:
 	node<T>* home; // The 'home' location for the CLL
 	int count; // The number of nodes
 };
+

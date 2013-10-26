@@ -12,6 +12,7 @@ Item::Item(void)
 // them to this.
 Item::Item(char* n, double w, double v)
 {
+	name = new char[strlen(n)+1];
 	strcpy(name, n);
 	weight = w;
 	volume = v;
@@ -27,7 +28,9 @@ Item::~Item(void)
 // Used if default constructor was invoked.
 int Item::createItem(char* n, double w, double v)
 {
-	name = n;
+	if(name) delete name;
+	name = new char[strlen(n)+1];
+	strcpy(name, n);
 	weight = w;
 	volume = v;
 }
@@ -42,7 +45,11 @@ int Item::copyItem(const Item & i)
 	double w, v;
 	worked = i.retrieve(n, w, v);
 
+	// Replaces an existingn name w/o leaks
+	if(name) delete name;
+
 	// Assign i's data to this
+	name = new char[strlen(n)+1];
 	strcpy(name, n);
 	weight = w;
 	volume = v;
@@ -56,6 +63,7 @@ int Item::retrieve(char* n, double& w, double& v) const
 {
 	if(name)
 	{
+		n = new char[strlen(name)+1];
 		strcpy(n, name);
 		w = weight;
 		v = volume;
@@ -66,6 +74,7 @@ int Item::retrieve(char* n, double& w, double& v) const
 		n = NULL;
 		w = weight;
 		v = volume;
+		return 0;
 	}
 }
 
@@ -74,6 +83,12 @@ int Item::retrieve(char* n, double& w, double& v) const
 int Item::retrieve(Item & i)
 {
 	i = *this;
+}
+
+std::ostream& Item::print(std::ostream& out) const
+{
+	out << this;
+	return out;
 }
 
 Item& Item::operator=(const Item& right)

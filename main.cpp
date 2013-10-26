@@ -4,11 +4,14 @@
 
 using namespace std;
 
+int getInput(char* n, double& w, double& v);
+
 int main(void)
 {
-	int i = 0; // stores the current length of the app array
-	char menu; // for user input
-	Moving kmh; // Karla's Mom's House
+	char menu; // for user menu input
+	char* n; // for user Item-class input
+	double w, v; // for user Item-clas sinput
+	Moving kmh; // Karla's Mom's House!
 
 	cout << "\n\nBACKSTORY:\n\n"
 		 << "Recently  I  have  spent  the  last  few  weeks\n"
@@ -33,40 +36,54 @@ int main(void)
 	do {
 		// Menu
 		cout << "Please enter one of the below commands:\n"
-			 << "add\n\t<N>ew item\n"
-			 << "view\n\t<D>onations queue\n"
+			 << "add to\n"
+			 << "\t<D>onations queue\n"
 			 << "\t<L>oading queue\n"
 			 << "\t<M>oving truck stack\n"
 			 << "\t<U>-store pod stack\n"
+			 << "<V>iew everything so far\n"
 			 << "<B>urn everything and start over (bad idea)\n"
 			 << "e<X>it program\n" << endl;
 			 
+		cout << ">";
 			cin >> menu;
 			cin.ignore(100, '\n');
 		
-		if (menu == 'N') {
-			editApp(appList[i]);
-			++i;
+		if (menu == 'D') {
+			getInput(n, w, v);
+			kmh.addToDonations(n, w, v);
 		}
-		
-		else if (menu == 'V') {
-			displayAppAll(appList, i);
-		}
-		
-		else if (menu == 'S') {
-			saveAppList(appList, i);
-		}
-		
+
 		else if (menu == 'L') {
-			i = loadAppList(appList);
+			getInput(n, w, v);
+			kmh.addToLoading(n, w, v);
+		}
+
+		else if (menu == 'M') {
+			getInput(n, w, v);
+			kmh.addToTruck(n, w, v);
+		}
+
+		else if (menu == 'U') {
+			getInput(n, w, v);
+			kmh.addToUStore(n, w, v);
+		}
+
+		else if (menu == 'V') {
+			kmh.displayAll(cout);
 		}
 		
+		else if (menu == 'B') {
+			cout << "...okay...\n" << endl;
+			kmh.burnEverythingAndStartOver();
+		}
+
 		else if (menu == 'X') {
 			cout << "kthxby\n" << endl;
 		}
 		
 		else {
-			cout << "BAD INPUT\n" << endl;
+			cout << "BAD INPUT. Make sure you used upper-case\n" << endl;
 		}
 		
 	
@@ -75,4 +92,12 @@ int main(void)
 	cout << "\n\n\n\nTERMINATING PROGRAM\n";
 
 	return 0;
+}
+
+int getInput(char* n, double& w, double& v)
+{
+	strcpy(n, "dummy item");
+	w = 1.0;
+	v = 1.0;
+	return 1;
 }

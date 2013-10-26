@@ -15,10 +15,10 @@ IMPLEMENTATIONS INSIDE THE .h FILE
 
 #ifndef LLPSTRUCT
 #define LLPSTRUCT
-template <class T> struct node
+template <class T> struct nodep
 {
 	T* data;
-	node<T>* next;
+	nodep<T>* next;
 };
 #endif // LLPSTRUCT
 
@@ -32,7 +32,7 @@ const int MAX = 5; // Change this for larger arrays in LLPSTRUCT
 	efficiently-implemented operator= overload,
 	as this template class simply uses operator=
 
-	Uses arrays of Ts for each node, rather than
+	Uses arrays of Ts for each nodep, rather than
 	individual Ts. Each array is of size MAX
 	(default: 5)
 
@@ -51,7 +51,7 @@ public:
 
 	~Storage(void)
 	{
-		node<T>* tmp;
+		nodep<T>* tmp;
 		while(top)
 		{
 			tmp = top;
@@ -67,7 +67,7 @@ public:
 		// Case 1: No items yet
 		if(NULL == top)
 		{
-			top = new node<T>;
+			top = new nodep<T>;
 			top->data = new T[MAX];
 			top->data[size%MAX] = data;
 			top->next = NULL;
@@ -76,10 +76,10 @@ public:
 		// Case 2: An array is full
 		else if((size%MAX)==0) // == because 0-4 is 5 entries
 		{
-			// Add new node of array of journal entries
-			node<T>* tmp = new node<T>;
+			// Add new nodep of array of journal entries
+			nodep<T>* tmp = new nodep<T>;
 			tmp->data = new T[MAX];
-			tmp->T[size%MAX] = data;
+			tmp->data[size%MAX] = data;
 
 			// Reassign top of stack
 			tmp->next = top;
@@ -104,7 +104,7 @@ public:
 		// Case 2: Got to da bottom of da stack yo.
 		else if((size%MAX)==0)
 		{
-			node<T>* tmp = top;
+			nodep<T>* tmp = top;
 			delete [] tmp->data;
 			top = top->next;
 			delete tmp;
@@ -138,7 +138,7 @@ public:
 
 	std::ostream& displayAll(std::ostream& out) const
 	{
-		node<T>* tmp = top;
+		nodep<T>* tmp = top;
 		
 		while(tmp)
 		{
@@ -150,6 +150,6 @@ public:
 	}
 private:
 	int size; // Current size
-	node<T>* top; // Pointer to the top of the stack
+	nodep<T>* top; // Pointer to the top of the stack
 };
 

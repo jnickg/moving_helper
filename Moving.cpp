@@ -38,7 +38,7 @@ std::ostream& Moving::displayDonations(std::ostream& out) const
 {
 	out << "\n\nDISPLAYING ITEMS STAGED FOR DONATION" << std::endl;
 	donations.displayAll(out);
-	return out
+	return out;
 }
 
 std::ostream& Moving::displayLoading(std::ostream& out) const
