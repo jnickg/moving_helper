@@ -102,7 +102,8 @@ int Moving::rmvFromUStore(Item& i)
 // Deletes all the items you spent years collecting
 int Moving::burnEverythingAndStartOver(void)
 {
-
+	std::cout << "You wouldn't want to do that!\n"
+			  << "(not yet implemented--for your own good)" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& out, const Moving* const mov)

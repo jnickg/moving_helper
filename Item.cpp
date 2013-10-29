@@ -41,11 +41,11 @@ int Item::copyItem(const Item & i)
 {
 	// Retrieve data from i
 	int worked;
-	char* n;
+	char* n = NULL;
 	double w, v;
 	worked = i.retrieve(n, w, v);
 
-	// Replaces an existingn name w/o leaks
+	// Replaces an existing name w/o leaks
 	if(name) delete name;
 
 	// Assign i's data to this
@@ -59,10 +59,11 @@ int Item::copyItem(const Item & i)
 
 // Returns 1 if it was able to copy all data from the Item
 // Returns 0 if there was no name
-int Item::retrieve(char* n, double& w, double& v) const
+int Item::retrieve(char*& n, double& w, double& v) const
 {
 	if(name)
 	{
+		if(n) delete n;
 		n = new char[strlen(name)+1];
 		strcpy(n, name);
 		w = weight;
@@ -94,7 +95,7 @@ std::ostream& Item::print(std::ostream& out) const
 Item& Item::operator=(const Item& right)
 {
 	(*this).copyItem(right);
-	return *this;
+	return (*this);
 }
 
 std::ostream& operator<<(std::ostream& out, const Item* const item)

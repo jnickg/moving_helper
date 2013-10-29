@@ -108,7 +108,11 @@ public:
 			delete [] tmp->data;
 			top = top->next;
 			delete tmp;
-			if((--size)<0) size=0;
+			if((--size)<0)
+			{
+				size=0;
+				return 0;
+			}
 			return 1;
 		}
 
@@ -122,9 +126,9 @@ public:
 
 	int peek(T & data)
 	{
-		if(top)
+		if(top && (size>0))
 		{
-			data = top->data[size%MAX];
+			data = top->data[(size-1)%MAX];
 			return size;
 		}
 		else return size;
@@ -139,10 +143,14 @@ public:
 	std::ostream& displayAll(std::ostream& out) const
 	{
 		nodep<T>* tmp = top;
-		
+		int i;
 		while(tmp)
 		{
-			out << tmp->data << std::endl;
+			// Because when there's a rat in the house, I get the gun.
+			for(i=0; i< (tmp==top ? ((size%MAX==0) ? MAX : size%MAX) : MAX); i++)
+			{
+				out << &(tmp->data[i]) << std::endl;
+			}
 			tmp = tmp->next;
 		}
 		

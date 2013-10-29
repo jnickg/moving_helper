@@ -105,6 +105,8 @@ public:
 		}
 	}
 
+	// Returns 1 if something was dequeued
+	// Returns 0 otherwise
 	int dequeue(T & data)
 	{
 		if(NULL == home)
@@ -118,7 +120,7 @@ public:
 			delete home;
 			home = NULL;
 
-			return --count;
+			return 1;
 		}
 		else
 		{
@@ -129,7 +131,7 @@ public:
 			delete home->next;
 			home->next = tmp;
 
-			return --count;
+			return 1;
 		}
 	}
 
@@ -156,14 +158,11 @@ public:
 		if(home)
 		{
 			node<T>* tmp = home->next;
-			T dummy;
 			do
 			{
-				dummy = tmp->data;
-				dummy.print(out);
-				//out << dummy << std::endl; // Doesn't work because compiler doesn't know what T is
+				tmp->data.print(out);
 				tmp = tmp->next;
-			} while(tmp!=home);
+			} while(tmp!=home->next);
 		}
 		return out;
 	}

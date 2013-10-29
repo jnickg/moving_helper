@@ -4,17 +4,18 @@
 
 using namespace std;
 
-int getInput(char* n, double& w, double& v);
+int getInput(char*& n, double& w, double& v);
 
 int main(void)
 {
 	char menu; // for user menu input
-	char* n; // for user Item-class input
+	char* n = NULL; // for user Item-class input
 	double w, v; // for user Item-clas sinput
 	Moving kmh; // Karla's Mom's House!
+	Item tmp; // Temporary storage used to printing dequeued/popped items
 
 	cout << "\n\nBACKSTORY:\n\n"
-		 << "Recently  I  have  spent  the  last  few  weeks\n"
+		 << "\"Recently  I  have  spent  the  last  few  weeks\n"
 		 << "preparing  my  parents  house  for  sale  and\n"
 		 << "moving  the  remaining  belongings  to various\n"
 		 << "locations. Some of the belongings my mom wanted\n"
@@ -29,7 +30,7 @@ int main(void)
 		 << "such that the last item in was to be the first\n"
 		 << "item back out (LIFO)  –  placing  items I need to\n"
 		 << "access soon up front and pushing data early on\n"
-		 << "that I don’t expect to need." << endl;
+		 << "that I don’t expect to need.\"" << endl;
 
 	cout << "\nLet's help Karla move her mum!\n" << endl;
 
@@ -42,6 +43,7 @@ int main(void)
 			 << "\t<M>oving truck stack\n"
 			 << "\t<U>-store pod stack\n"
 			 << "<V>iew everything so far\n"
+			 << "<R>emove one item from each\n"
 			 << "<B>urn everything and start over (bad idea)\n"
 			 << "e<X>it program\n" << endl;
 			 
@@ -72,6 +74,21 @@ int main(void)
 		else if (menu == 'V') {
 			kmh.displayAll(cout);
 		}
+
+		else if (menu == 'R') {
+			if(kmh.rmvFromDonations(tmp))
+			cout << "Removed from Donations:\n"
+				 << &tmp << endl;
+			if(kmh.rmvFromLoading(tmp))
+			cout << "Removed from Loading:\n"
+				 << &tmp << endl;
+			if(kmh.rmvFromTruck(tmp))
+			cout << "Removed from Truck:\n"
+				 << &tmp << endl;
+			if(kmh.rmvFromUStore(tmp))
+			cout << "Removed from U-Store:\n"
+				 << &tmp << endl;
+		}
 		
 		else if (menu == 'B') {
 			cout << "...okay...\n" << endl;
@@ -94,10 +111,28 @@ int main(void)
 	return 0;
 }
 
-int getInput(char* n, double& w, double& v)
+int getInput(char*& n, double& w, double& v)
 {
-	strcpy(n, "dummy item");
-	w = 1.0;
-	v = 1.0;
+	char buffer[512];
+
+	cout << "\nNew item info:"
+		 << "\n(string) name>\t";
+	cin >> buffer;
+	cin.ignore(100, '\n');
+
+	
+	if(n) delete n; // Avoid leaks
+	// Cast from buffer to n
+	n = new char[strlen(buffer)+1];
+	strcpy(n, buffer);
+
+	cout << "(double) weight>";
+	cin >> w;
+	cin.ignore(100, '\n');
+
+	cout << "(double) volume>";
+	cin >> v;
+	cin.ignore(100, '\n');
+
 	return 1;
 }

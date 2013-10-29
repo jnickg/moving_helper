@@ -28,7 +28,7 @@ public:
 
 	int createItem(char* n, double w, double v); // For default-constructed Items
 	int copyItem(const Item & i); // To push all data at once from another Item
-	int retrieve(char* n, double& w, double& v) const;
+	int retrieve(char*& n, double& w, double& v) const;
 	int retrieve(Item & i); // To pull all data at once to another Item
 	
 	std::ostream& print(std::ostream& out) const;
